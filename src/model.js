@@ -2753,13 +2753,13 @@ Specify a different name for either index to resolve this issue.`);
           const upsertKeys = [];
           if(options.conflictFields && options.conflictFields.length > 0)
             upsertKeys.push(...options.conflictFields);
-          /*else 
+          else 
             for (const i of model.getIndexes()) {
                 if (i.unique && !i.where) { // Don't infer partial indexes
                    upsertKeys.push(...i.fields);
                 }
              }
-          */
+          
           options.upsertKeys = upsertKeys.length > 0
             ? upsertKeys
             : Object.values(model.primaryKeys).map(x => x.field);
