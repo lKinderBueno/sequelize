@@ -2751,8 +2751,8 @@ Specify a different name for either index to resolve this issue.`);
           options.updateOnDuplicate = options.updateOnDuplicate.map(attr => model.rawAttributes[attr].field || attr);
 
           const upsertKeys = [];
-          if(options2.conflictFields && options2.conflictFields.length > 0)
-            upsertKeys.push(...options2.conflictFields);
+          if(options.conflictFields && options.conflictFields.length > 0)
+            upsertKeys.push(...options.conflictFields);
           else 
             for (const i of model.getIndexes()) {
                 if (i.unique && !i.where) { // Don't infer partial indexes
