@@ -2751,12 +2751,14 @@ Specify a different name for either index to resolve this issue.`);
           options.updateOnDuplicate = options.updateOnDuplicate.map(attr => model.rawAttributes[attr].field || attr);
 
           const upsertKeys = [];
-
-          for (const i of model.getIndexes()) {
-            if (i.unique && !i.where) { // Don't infer partial indexes
-              upsertKeys.push(...i.fields);
-            }
-          }
+          if(options2.conflictFields && options2.conflictFields.length > 0)
+            upsertKeys.push(...options2.conflictFields);
+          else 
+            for (const i of model.getIndexes()) {
+                if (i.unique && !i.where) { // Don't infer partial indexes
+                   upsertKeys.push(...i.fields);
+                }
+             }
 
           options.upsertKeys = upsertKeys.length > 0
             ? upsertKeys
